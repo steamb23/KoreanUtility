@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoreanUtility", "KoreanUtility\KoreanUtility.csproj", "{55743A55-3DAD-4A6F-B01D-3D1448B68F61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoreanUtilityTest", "KoreanUtilityTest\KoreanUtilityTest.csproj", "{88B309B0-7959-4460-AE73-219D47BCFBD1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55743A55-3DAD-4A6F-B01D-3D1448B68F61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55743A55-3DAD-4A6F-B01D-3D1448B68F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55743A55-3DAD-4A6F-B01D-3D1448B68F61}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{55743A55-3DAD-4A6F-B01D-3D1448B68F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55743A55-3DAD-4A6F-B01D-3D1448B68F61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B309B0-7959-4460-AE73-219D47BCFBD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B309B0-7959-4460-AE73-219D47BCFBD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B309B0-7959-4460-AE73-219D47BCFBD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B309B0-7959-4460-AE73-219D47BCFBD1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
