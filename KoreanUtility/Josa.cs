@@ -56,8 +56,6 @@ namespace SteamB23.KoreanUtility
                     return GenericJosaRule(lastChar, "과", "와");
                 case JosaType.아_야:
                     return GenericJosaRule(lastChar, "아", "야");
-                case JosaType.이여_여:
-                    return GenericJosaRule(lastChar, "이여", "여");
                 case JosaType.이다_다:
                     return GenericJosaRule(lastChar, "이", "");
                 case JosaType.으로_로:
@@ -110,19 +108,15 @@ namespace SteamB23.KoreanUtility
             /// </summary>
             _아야 = 4,
             /// <summary>
-            /// 호격 조사 : 이여/여
-            /// </summary>
-            _이여 = 5,
-            /// <summary>
             /// 서술격 조사 : 이다/다
-            /// (경고 : 이다/다, 이고/고, 이니/고, 이면/면, 이지/지 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
+            /// (경고 : 이다/다, 이고/고, 이니/고, 이면/면, 이지/지, 이여/여 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
             /// </summary>
-            _이다 = 6,
+            _이다 = 5,
             /// <summary>
             /// 부사격 조사 : 으로/로,
             /// (경고 : ㄹ받침은 받침이 없는 경우와 같습니다.)
             /// </summary>
-            _으로 = 7,
+            _으로 = 6,
 
             // 가독성을 위한 값
             /// <summary>
@@ -146,19 +140,15 @@ namespace SteamB23.KoreanUtility
             /// </summary>
             아_야 = 4,
             /// <summary>
-            /// 호격 조사 : 이여/여
-            /// </summary>
-            이여_여 = 5,
-            /// <summary>
             /// 서술격 조사 : 이다/다
             /// (경고 : 이다/다, 이고/고, 이니/고, 이면/고, 이지/지 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
             /// </summary>
-            이다_다 = 6,
+            이다_다 = 5,
             /// <summary>
             /// 부사격 조사 : 으로/로,
             /// ㄹ받침은 받침이 없는 경우와 같다.
             /// </summary>
-            으로_로 = 7,
+            으로_로 = 6,
 
             // 영어 대문자 값
             /// <summary>
@@ -182,19 +172,15 @@ namespace SteamB23.KoreanUtility
             /// </summary>
             AY = 4,
             /// <summary>
-            /// 호격 조사 : 이여/여
-            /// </summary>
-            IYY = 5,
-            /// <summary>
             /// 서술격 조사 : 이다/다
             /// (경고 : 이다/다, 이고/고, 이니/고, 이면/고, 이지/지 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
             /// </summary>
-            IDD = 6,
+            IDD = 5,
             /// <summary>
             /// 부사격 조사 : 으로/로,
             /// ㄹ받침은 받침이 없는 경우와 같다.
             /// </summary>
-            ERR = 7
+            ERR = 6
         }
     }
 }
