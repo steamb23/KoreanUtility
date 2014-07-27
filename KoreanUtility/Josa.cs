@@ -29,8 +29,9 @@ namespace SteamB23.KoreanUtility
         public static void AppendJosa(this StringBuilder textBuilder, JosaType type)
         {
             string text = textBuilder.ToString();
-            textBuilder.Clear();
-            textBuilder.Append(AppendJosa(text, type));
+
+            char lastChar = char.Parse(text.Substring(text.Length - 1, 1));
+            textBuilder.Append(DecideJosa(lastChar, type));
         }
         /// <summary>
         /// 마지막 글자의 받침 유무에 따라 바뀌는 조사를 결정합니다. 
