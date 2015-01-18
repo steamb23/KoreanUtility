@@ -7,6 +7,7 @@ KoreanUtility
 
 - '은/는', '이/가', '을/를', '과/와', '아/야', '이다/다', '으로/로' 등의 세세한 조사 처리 지원.
 - String, StringBuilder 확장 메서드 지원.
+- 자소 분리 기능 지원.
 
 ## 사용 예제
 
@@ -17,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using KoreanUtility;
+using KoreanUtility.Grammar;
 
 namespace KoreanUtilityExample
 {
@@ -25,7 +26,7 @@ namespace KoreanUtilityExample
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("사과".AppendJosa(JosaType.EN)+" 빨간색.");
+            Console.WriteLine("사과".조사추가(조사.은는)+" 빨간색.");
         }
     }
 }
