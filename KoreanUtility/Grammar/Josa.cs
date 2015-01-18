@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SteamB23.KoreanUtility
+namespace SteamB23.KoreanUtility.Grammar
 {
     /// <summary>
     /// 한국어의 조사 처리와 관련된 기능을 제공하는 클래스입니다.

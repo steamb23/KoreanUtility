@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamB23.KoreanUtility;
+using SteamB23.KoreanUtility.Grammar;
 
 namespace KoreanUtilityTest
 {
