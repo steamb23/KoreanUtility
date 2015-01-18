@@ -5,6 +5,9 @@ using System.Text;
 
 namespace SteamB23.KoreanUtility.Hangul
 {
+    /// <summary>
+    /// 자소에 대한 정보를 제공하는 구조체입니다.
+    /// </summary>
     public struct Phoneme
     {
         internal Phoneme(char source, char initialConsonant, char vowel, char finalConsonant, byte initialConsonantNumber, byte vowelNumber, byte finalConsonantNumber)
@@ -17,12 +20,39 @@ namespace SteamB23.KoreanUtility.Hangul
             this.vowelNumber = vowelNumber;
             this.finalConsonantNumber = finalConsonantNumber;
         }
+        /// <summary>
+        /// 원본 글자입니다.
+        /// </summary>
         public char source;
+        /// <summary>
+        /// 초성입니다.
+        /// 한글 완성형 외의 글자의 기본값은 \0입니다.
+        /// </summary>
         public char initialConsonant;
+        /// <summary>
+        /// 중성입니다.
+        /// 한글 완성형 외의 글자의 기본값은 \0입니다.
+        /// </summary>
         public char vowel;
+        /// <summary>
+        /// 종성입니다.
+        /// 한글 완성형 외의 글자의 기본값은 \0입니다.
+        /// </summary>
         public char finalConsonant;
+        /// <summary>
+        /// 초성 번호입니다.
+        /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
+        /// </summary>
         public byte initialConsonantNumber;
+        /// <summary>
+        /// 중성 번호입니다.
+        /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
+        /// </summary>
         public byte vowelNumber;
+        /// <summary>
+        /// 종성 번호입니다.
+        /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
+        /// </summary>
         public byte finalConsonantNumber;
     }
 }
