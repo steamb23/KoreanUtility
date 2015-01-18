@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SteamB23.KoreanUtility.Hangul;
 
 namespace SteamB23.KoreanUtility.Grammar
 {
@@ -41,6 +42,7 @@ namespace SteamB23.KoreanUtility.Grammar
         /// <returns>결정된 조사입니다.</returns>
         public static string 조사결정(char lastChar, 조사 type)
         {
+            Phoneme phoneme = PhonemeSeparation.GetPhoneme(lastChar);
             if ((lastChar <= '가' && lastChar >= '힣'))
             {
                 lastChar = '아';
@@ -48,19 +50,19 @@ namespace SteamB23.KoreanUtility.Grammar
             switch (type)
             {
                 case 조사.은_는:
-                    return GenericJosaRule(lastChar, "은", "는");
+                    return GenericJosaRule(phoneme, "은", "는");
                 case 조사.이_가:
-                    return GenericJosaRule(lastChar, "이", "가");
+                    return GenericJosaRule(phoneme, "이", "가");
                 case 조사.을_를:
-                    return GenericJosaRule(lastChar, "을", "를");
+                    return GenericJosaRule(phoneme, "을", "를");
                 case 조사.과_와:
-                    return GenericJosaRule(lastChar, "과", "와");
+                    return GenericJosaRule(phoneme, "과", "와");
                 case 조사.아_야:
-                    return GenericJosaRule(lastChar, "아", "야");
+                    return GenericJosaRule(phoneme, "아", "야");
                 case 조사.이다_다:
-                    return GenericJosaRule(lastChar, "이", "");
+                    return GenericJosaRule(phoneme, "이", "");
                 case 조사.으로_로:
-                    if (((lastChar - 0xAC00) % (21 * 28)) % 28 == 0 || ((lastChar - 0xAC00) % (21 * 28)) % 28 == 5)
+                    if (phoneme.finalConsonantNumber == 0 || phoneme.finalConsonantNumber == 5)
                         return "로";
                     else
                         return "으로";
@@ -71,13 +73,13 @@ namespace SteamB23.KoreanUtility.Grammar
         /// <summary>
         /// 일반적인 조사 선택 규칙입니다.
         /// </summary>
-        /// <param name="lastChar">문자열 마지막에 발견되는 글자입니다.</param>
+        /// <param name="phoneme">문자열 마지막에 발견되는 글자입니다.</param>
         /// <param name="lastCharHaveJongseong">받침이 있을때 반환할 문자열입니다.</param>
         /// <param name="lastCharNotHaveJongseong">받침이 없을때 반환할 문자열입니다.</param>
         /// <returns>받침이 있으면 <c>lastCharHaveJongseong</c>를 반환하고, 없으면 <c>lastCharNotHaveJongseong</c>을 반환합니다.</returns>
-        internal static string GenericJosaRule(char lastChar, string lastCharHaveJongseong, string lastCharNotHaveJongseong)
+        internal static string GenericJosaRule(Phoneme phoneme, string lastCharHaveJongseong, string lastCharNotHaveJongseong)
         {
-            if (((lastChar - 0xAC00) % (21 * 28)) % 28 == 0)
+            if (phoneme.finalConsonantNumber == 0)
                 return lastCharNotHaveJongseong;
             else
                 return lastCharHaveJongseong;
