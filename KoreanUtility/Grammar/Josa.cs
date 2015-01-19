@@ -42,7 +42,7 @@ namespace SteamB23.KoreanUtility.Grammar
         /// <returns>결정된 조사입니다.</returns>
         public static string 조사결정(char lastChar, 조사 type)
         {
-            Phoneme phoneme = PhonemeSeparation.GetPhoneme(lastChar);
+            Phoneme phoneme = PhonemeConverter.ToPhoneme(lastChar);
             if ((lastChar <= '가' && lastChar >= '힣'))
             {
                 lastChar = '아';

@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Grammar\Josa.cs" />
     <Compile Include="Hangul\Phoneme.cs" />
-    <Compile Include="Hangul\PhonemeSeparation.cs" />
+    <Compile Include="Hangul\PhonemeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
