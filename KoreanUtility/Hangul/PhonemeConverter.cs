@@ -26,7 +26,7 @@ namespace SteamB23.KoreanUtility.Hangul
 
                 char initialConsonant = (char)(tempInitialConsonant + 0x1100);
                 char vowel = (char)(tempVowel + 0x1161);
-                char finalConsonant = (char)(tempFinalConsonant + 0x11a7);
+                char finalConsonant = (tempFinalConsonant != 0) ? (char)(tempFinalConsonant + 0x11a7) : '\0';
 
                 return new Phoneme(character, initialConsonant, vowel, finalConsonant, (byte)tempInitialConsonant, (byte)tempFinalConsonant, (byte)tempFinalConsonant);
             }
