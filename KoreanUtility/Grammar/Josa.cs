@@ -62,7 +62,7 @@ namespace SteamB23.KoreanUtility.Grammar
                 case 조사.이다_다:
                     return GenericJosaRule(phoneme, "이", "");
                 case 조사.으로_로:
-                    if (phoneme.finalConsonantNumber == 0 || phoneme.finalConsonantNumber == 5)
+                    if (phoneme.finalNumber == 0 || phoneme.finalNumber == 5)
                         return "로";
                     else
                         return "으로";
@@ -79,7 +79,7 @@ namespace SteamB23.KoreanUtility.Grammar
         /// <returns>받침이 있으면 <c>lastCharHaveJongseong</c>를 반환하고, 없으면 <c>lastCharNotHaveJongseong</c>을 반환합니다.</returns>
         internal static string GenericJosaRule(Phoneme phoneme, string lastCharHaveJongseong, string lastCharNotHaveJongseong)
         {
-            if (phoneme.finalConsonantNumber == 0)
+            if (phoneme.finalNumber == 0)
                 return lastCharNotHaveJongseong;
             else
                 return lastCharHaveJongseong;
