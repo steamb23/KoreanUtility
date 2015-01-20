@@ -10,15 +10,15 @@ namespace SteamB23.KoreanUtility.Hangul
     /// </summary>
     public struct Phoneme
     {
-        internal Phoneme(char source, char initial, char peak, char final, byte initialNumber, byte peakNumber, byte finalNumber)
+        internal Phoneme(char source, char initialConsonant, char medialVowel, char finalConsonant, byte initialConsonantNumber, byte vowelNumber, byte finalConsonantNumber)
         {
             this.source = source;
-            this.initial = initial;
-            this.peak = peak;
-            this.final = final;
-            this.initialNumber = initialNumber;
-            this.peakNumber = peakNumber;
-            this.finalNumber = finalNumber;
+            this.initialConsonant = initialConsonant;
+            this.medialVowel = medialVowel;
+            this.finalConsonant = finalConsonant;
+            this.initialConsonantNumber = initialConsonantNumber;
+            this.medialVowelNumber = vowelNumber;
+            this.finalConsonantNumber = finalConsonantNumber;
         }
         /// <summary>
         /// 원본 글자입니다.
@@ -28,31 +28,31 @@ namespace SteamB23.KoreanUtility.Hangul
         /// 초성입니다.
         /// 한글 완성형 외의 글자의 기본값은 \0입니다.
         /// </summary>
-        public char initial;
+        public char initialConsonant;
         /// <summary>
         /// 중성입니다.
         /// 한글 완성형 외의 글자의 기본값은 \0입니다.
         /// </summary>
-        public char peak;
+        public char medialVowel;
         /// <summary>
         /// 종성입니다.
         /// 한글 완성형 외의 글자의 기본값은 \0입니다.
         /// </summary>
-        public char final;
+        public char finalConsonant;
         /// <summary>
         /// 초성 번호입니다.
         /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
         /// </summary>
-        public byte initialNumber;
+        public byte initialConsonantNumber;
         /// <summary>
         /// 중성 번호입니다.
         /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
         /// </summary>
-        public byte peakNumber;
+        public byte medialVowelNumber;
         /// <summary>
         /// 종성 번호입니다.
         /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
         /// </summary>
-        public byte finalNumber;
+        public byte finalConsonantNumber;
     }
 }

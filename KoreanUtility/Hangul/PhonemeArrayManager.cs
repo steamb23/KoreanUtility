@@ -34,12 +34,12 @@ namespace SteamB23.KoreanUtility.Hangul
             StringBuilder tempStringBuilder = new StringBuilder();
             foreach (var ftemp in phonemes)
             {
-                if (ftemp.initial != '\0' || ftemp.peak != '\0')
+                if (ftemp.initialConsonant != '\0' || ftemp.medialVowel != '\0')
                 {
-                    tempStringBuilder.Append(ftemp.initial);
-                    tempStringBuilder.Append(ftemp.peak);
-                    if (ftemp.final != '\0')
-                        tempStringBuilder.Append(ftemp.final);
+                    tempStringBuilder.Append(ftemp.initialConsonant);
+                    tempStringBuilder.Append(ftemp.medialVowel);
+                    if (ftemp.finalConsonant != '\0')
+                        tempStringBuilder.Append(ftemp.finalConsonant);
                 }
                 else
                     tempStringBuilder.Append(ftemp.source);
@@ -56,12 +56,12 @@ namespace SteamB23.KoreanUtility.Hangul
             StringBuilder tempStringBuilder = new StringBuilder();
             foreach (var ftemp in phonemes)
             {
-                if (ftemp.initial != '\0' || ftemp.peak != '\0')
+                if (ftemp.initialConsonant != '\0' || ftemp.medialVowel != '\0')
                 {
-                    tempStringBuilder.Append(ftemp.initial);
-                    tempStringBuilder.Append(ftemp.peak);
-                    if (ftemp.final != '\0')
-                        tempStringBuilder.Append(ftemp.final);
+                    tempStringBuilder.Append(ftemp.initialConsonant);
+                    tempStringBuilder.Append(ftemp.medialVowel);
+                    if (ftemp.finalConsonant != '\0')
+                        tempStringBuilder.Append(ftemp.finalConsonant);
                 }
                 else
                     tempStringBuilder.Append(ftemp.source);
@@ -73,14 +73,14 @@ namespace SteamB23.KoreanUtility.Hangul
         /// </summary>
         /// <param name="phonemes">대상 Phoneme 배열입니다.</param>
         /// <returns>initial 문자들을 조합한 문자열입니다.</returns>
-        public static string GetInitialString(this Phoneme[] phonemes)
+        public static string GetInitialConsonantString(this Phoneme[] phonemes)
         {
             StringBuilder tempStringBuilder = new StringBuilder();
             foreach (var ftemp in phonemes)
             {
-                if (ftemp.initial == '\0')
+                if (ftemp.initialConsonant == '\0')
                 {
-                    tempStringBuilder.Append(ftemp.initial);
+                    tempStringBuilder.Append(ftemp.initialConsonant);
                 }
                 else
                     tempStringBuilder.Append(ftemp.source);
@@ -92,14 +92,14 @@ namespace SteamB23.KoreanUtility.Hangul
         /// </summary>
         /// <param name="phonemes">대상 Phoneme 배열입니다.</param>
         /// <returns>peak 문자들을 조합한 문자열입니다.</returns>
-        public static string GetPeakString(this Phoneme[] phonemes)
+        public static string GetMedialVowelString(this Phoneme[] phonemes)
         {
             StringBuilder tempStringBuilder = new StringBuilder();
             foreach (var ftemp in phonemes)
             {
-                if (ftemp.peak == '\0')
+                if (ftemp.medialVowel == '\0')
                 {
-                    tempStringBuilder.Append(ftemp.peak);
+                    tempStringBuilder.Append(ftemp.medialVowel);
                 }
                 else
                     tempStringBuilder.Append(ftemp.source);
@@ -111,14 +111,14 @@ namespace SteamB23.KoreanUtility.Hangul
         /// </summary>
         /// <param name="phonemes">대상 Phoneme 배열입니다.</param>
         /// <returns>final 문자들을 조합한 문자열입니다.</returns>
-        public static string GetFinalString(this Phoneme[] phonemes)
+        public static string GetFinalConsonantString(this Phoneme[] phonemes)
         {
             StringBuilder tempStringBuilder = new StringBuilder();
             foreach (var ftemp in phonemes)
             {
-                if (ftemp.final == '\0')
+                if (ftemp.finalConsonant == '\0')
                 {
-                    tempStringBuilder.Append(ftemp.final);
+                    tempStringBuilder.Append(ftemp.finalConsonant);
                 }
                 else
                     tempStringBuilder.Append(ftemp.source);
