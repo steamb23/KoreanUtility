@@ -15,7 +15,7 @@ namespace SteamB23.KoreanUtility.Hangul
         /// </summary>
         /// <param name="character">자소 분리할 글자</param>
         /// <returns>분리된 자소</returns>
-        public static Phoneme ToPhoneme(char character)
+        public static Phoneme CharacterToPhoneme(char character)
         {
             if (character >= 0xac00 && character <= 0xd7a3)
             {
@@ -40,13 +40,13 @@ namespace SteamB23.KoreanUtility.Hangul
         /// </summary>
         /// <param name="characters">자소 분리할 문자의 배열</param>
         /// <returns>분리된 자소의 배열</returns>
-        public static Phoneme[] ToPhonemes(char[] characters)
+        public static Phoneme[] CharactersToPhonemes(char[] characters)
         {
             Phoneme[] phonemes = new Phoneme[characters.Length];
             int fcount=0;
             foreach (var ftemp in characters)
             {
-                phonemes[fcount] = ToPhoneme(ftemp);
+                phonemes[fcount] = CharacterToPhoneme(ftemp);
                 fcount++;
             }
             return phonemes;
@@ -56,9 +56,9 @@ namespace SteamB23.KoreanUtility.Hangul
         /// </summary>
         /// <param name="text">자소 분리할 문자열</param>
         /// <returns>분리된 자소의 배열</returns>
-        public static Phoneme[] ToPhonemes(string text)
+        public static Phoneme[] StringToPhonemes(string text)
         {
-            return ToPhonemes(text.ToCharArray());
+            return CharactersToPhonemes(text.ToCharArray());
         }
     }
 }
