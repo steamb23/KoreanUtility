@@ -13,9 +13,11 @@ namespace SteamB23.KoreanUtility.Hangul
         internal Phoneme(char source, char initialConsonant, char medialVowel, char finalConsonant, byte initialConsonantNumber, byte vowelNumber, byte finalConsonantNumber)
         {
             this.source = source;
+
             this.initialConsonant = initialConsonant;
             this.medialVowel = medialVowel;
             this.finalConsonant = finalConsonant;
+
             this.initialConsonantNumber = initialConsonantNumber;
             this.medialVowelNumber = vowelNumber;
             this.finalConsonantNumber = finalConsonantNumber;
@@ -39,6 +41,7 @@ namespace SteamB23.KoreanUtility.Hangul
         /// 한글 완성형 외의 글자의 기본값은 \0입니다.
         /// </summary>
         public char finalConsonant;
+
         /// <summary>
         /// 초성 번호입니다.
         /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
@@ -54,5 +57,16 @@ namespace SteamB23.KoreanUtility.Hangul
         /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
         /// </summary>
         public byte finalConsonantNumber;
+
+        /// <summary>
+        /// 이 인스턴스의 초성, 중성, 종성을 문자열로 표현합니다.
+        /// </summary>
+        /// <returns>초성+중성(+종성)</returns>
+        public override string ToString()
+        {
+            return this.initialConsonant.ToString() +
+                this.medialVowel.ToString() +
+                ((this.finalConsonant == '\0' ? "" : this.finalConsonant.ToString()));
+        }
     }
 }
