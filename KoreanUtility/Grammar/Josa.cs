@@ -42,11 +42,12 @@ namespace SteamB23.KoreanUtility.Grammar
         /// <returns>결정된 조사입니다.</returns>
         public static string 조사결정(char lastChar, 조사 type)
         {
-            Phoneme phoneme = PhonemeConverter.CharacterToPhoneme(lastChar);
+            // 완성형 한글이 아니면 일단 '아'로 치환한다.
             if ((lastChar <= '가' && lastChar >= '힣'))
             {
                 lastChar = '아';
             }
+            Phoneme phoneme = PhonemeConverter.CharacterToPhoneme(lastChar);
             switch (type)
             {
                 case 조사.은_는:
