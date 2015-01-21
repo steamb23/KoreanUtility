@@ -10,7 +10,7 @@ namespace SteamB23.KoreanUtility.Hangul
     /// </summary>
     public struct Phoneme
     {
-        internal Phoneme(char source, char initialConsonant, char medialVowel, char finalConsonant, byte initialConsonantNumber, byte vowelNumber, byte finalConsonantNumber)
+        internal Phoneme(char source, char initialConsonant, char medialVowel, char finalConsonant, byte initialConsonantNumber, byte medialVowelNumber, byte finalConsonantNumber)
         {
             this.source = source;
 
@@ -19,7 +19,7 @@ namespace SteamB23.KoreanUtility.Hangul
             this.finalConsonant = finalConsonant;
 
             this.initialConsonantNumber = initialConsonantNumber;
-            this.medialVowelNumber = vowelNumber;
+            this.medialVowelNumber = medialVowelNumber;
             this.finalConsonantNumber = finalConsonantNumber;
         }
         /// <summary>
