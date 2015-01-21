@@ -32,7 +32,7 @@ namespace SteamB23.KoreanUtility.Hangul
             }
             else
             {
-                return new Phoneme(character, '\0', '\0', '\0', 0xff, 0xff, 0xff);
+                return new Phoneme(character, '\0', '\0', '\0', 0, 0, 0);
             }
         }
         /// <summary>

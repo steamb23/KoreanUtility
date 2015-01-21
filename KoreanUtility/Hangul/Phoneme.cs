@@ -44,17 +44,17 @@ namespace SteamB23.KoreanUtility.Hangul
 
         /// <summary>
         /// 초성 번호입니다.
-        /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
+        /// 한글 완성형 외의 글자의 기본값은 0입니다.
         /// </summary>
         public byte initialConsonantNumber;
         /// <summary>
         /// 중성 번호입니다.
-        /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
+        /// 한글 완성형 외의 글자의 기본값은 0입니다.
         /// </summary>
         public byte medialVowelNumber;
         /// <summary>
         /// 종성 번호입니다.
-        /// 한글 완성형 외의 글자의 기본값은 0xff입니다.
+        /// 한글 완성형 외의 글자의 기본값은 0입니다.
         /// </summary>
         public byte finalConsonantNumber;
 
