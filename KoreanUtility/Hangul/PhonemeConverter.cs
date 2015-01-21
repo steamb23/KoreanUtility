@@ -60,5 +60,26 @@ namespace SteamB23.KoreanUtility.Hangul
         {
             return CharactersToPhonemes(text.ToCharArray());
         }
+        /// <summary>
+        /// 첫가끝 문자를 모아서 Phoneme를 구성합니다.
+        /// </summary>
+        /// <param name="initialConsonant">초성입니다.</param>
+        /// <param name="medialVowel">중성입니다.</param>
+        /// <param name="finalConsonant">종성입니다. 없을 경우에는 '\0'가 대입되어야합니다.</param>
+        /// <returns></returns>
+        public static Phoneme PhonemeCollecting(char initialConsonant, char medialVowel, char finalConsonant)
+        {
+            // 첫가끝 번호 계산
+            int initialConsonantNumber = initialConsonant - 0x1100;
+            int medialVowelNumber = medialVowel - 0x1161;
+            int finalConsonantNumber = (medialVowel == '\0') ? 0 : medialVowel - 0x11a7;
+
+            // 조합
+            char tempSource = (char)(((initialConsonantNumber * 21) + medialVowelNumber) * 28 + finalConsonantNumber + 0xac00);
+
+            // 반환
+            return new Phoneme(tempSource, initialConsonant, medialVowel, finalConsonant, (byte)initialConsonantNumber, (byte)medialVowelNumber, (byte)finalConsonantNumber);
+
+        }
     }
 }
