@@ -82,7 +82,7 @@ namespace SteamB23.KoreanUtility.Hangul
             return tempStringBuilder.ToString();
         }
         /// <summary>
-        /// Phoneme배열에서 중성 문자를 조합한 문자열을 가져옵니다.
+        /// Phoneme배열에서 종성 문자를 조합한 문자열을 가져옵니다.
         /// </summary>
         /// <param name="phonemes">대상 Phoneme 배열입니다.</param>
         /// <returns>final 문자들을 조합한 문자열입니다.</returns>
