@@ -42,10 +42,10 @@ namespace SteamB23.KoreanUtility.Grammar
         /// <returns>결정된 조사입니다.</returns>
         public static string 조사결정(char lastChar, 조사 type)
         {
-            // 완성형 한글이 아니면 일단 '아'로 치환한다.
-            if ((lastChar <= '가' && lastChar >= '힣'))
+            // 완성형 한글이 아니면 일단 '각'으로 특정해놓는다.
+            if (!(lastChar >= '가' && lastChar <= '힣'))
             {
-                lastChar = '아';
+                lastChar = '각';
             }
             Phoneme phoneme = PhonemeConverter.CharacterToPhoneme(lastChar);
             switch (type)
@@ -63,7 +63,7 @@ namespace SteamB23.KoreanUtility.Grammar
                 case 조사.이다_다:
                     return GenericJosaRule(phoneme, "이", "");
                 case 조사.으로_로:
-                    if (phoneme.finalConsonantNumber == 0 || phoneme.finalConsonantNumber == 5)
+                    if (phoneme.finalConsonantNumber == 0 || phoneme.finalConsonantNumber == 8)
                         return "로";
                     else
                         return "으로";
