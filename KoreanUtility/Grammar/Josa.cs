@@ -35,47 +35,48 @@ namespace SteamB23.KoreanUtility.Grammar
             char lastChar = char.Parse(text.Substring(text.Length - 1, 1));
             textBuilder.Append(조사결정(lastChar, type));
         }
-        static Regex josaSignRegex = new Regex(@"\{은는\}|\{이가\}|\{을를\}|\{과와\}|\{아야\}|\{이\}|\{으로\}|\{는은\}|\{가이\}|\{를을\}|\{와과\}|\{야아\}|\{로\}", RegexOptions.Compiled);
+        static Regex josaSignRegex;
         public static string 문자처리(string text)
         {
+            정규식컴파일();
             string[] spritedText = josaSignRegex.Split(text);
             MatchCollection matchedText = josaSignRegex.Matches(text);
-            StringBuilder resultText = new StringBuilder();
+            StringBuilder resultText = new StringBuilder(spritedText.Length);
             for (int i = 0; i < matchedText.Count; i++)
             {
                 switch (matchedText[i].Value)
                 {
-                    case "{은는}":
-                    case "{는은}":
+                    case "[은는]":
+                    case "[는은]":
                         resultText.Append(spritedText[i]);
                         resultText.조사추가(조사종류.은는);
                         break;
-                    case "{이가}":
-                    case "{가이}":
+                    case "[이가]":
+                    case "[가이]":
                         resultText.Append(spritedText[i]);
                         resultText.조사추가(조사종류.이가);
                         break;
-                    case "{을를}":
-                    case "{를을}":
+                    case "[을를]":
+                    case "[를을]":
                         resultText.Append(spritedText[i]);
                         resultText.조사추가(조사종류.을를);
                         break;
-                    case "{과와}":
-                    case "{와과}":
+                    case "[과와]":
+                    case "[와과]":
                         resultText.Append(spritedText[i]);
                         resultText.조사추가(조사종류.과와);
                         break;
-                    case "{아야}":
-                    case "{야아}":
+                    case "[아야]":
+                    case "[야아]":
                         resultText.Append(spritedText[i]);
                         resultText.조사추가(조사종류.아야);
                         break;
-                    case "{이}":
+                    case "[이]":
                         resultText.Append(spritedText[i]);
                         resultText.조사추가(조사종류.이);
                         break;
-                    case "{으로}":
-                    case "{로}":
+                    case "[으로]":
+                    case "[로]":
                         resultText.Append(spritedText[i]);
                         resultText.조사추가(조사종류.으로);
                         break;
@@ -83,6 +84,17 @@ namespace SteamB23.KoreanUtility.Grammar
             }
             resultText.Append(spritedText.Last());
             return resultText.ToString();
+        }
+        public static string 문자처리(string text, params object[] args)
+        {
+            return 문자처리(string.Format(text, args));
+        }
+        public static void 정규식컴파일()
+        {
+            if (josaSignRegex == null)
+            {
+                josaSignRegex = new Regex(@"\[은는\]|\[이가\]|\[을를\]|\[과와\]|\[아야\]|\[이\]|\[으로\]|\[는은\]|\[가이\]|\[를을\]|\[와과\]|\[야아\]|\[로\]", RegexOptions.Compiled);
+            }
         }
         /// <summary>
         /// 마지막 글자의 받침 유무에 따라 바뀌는 조사를 결정합니다. 
