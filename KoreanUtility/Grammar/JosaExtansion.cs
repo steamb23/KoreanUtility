@@ -9,7 +9,7 @@ namespace SteamB23.KoreanUtility.Grammar
     /// <summary>
     /// 한국어의 조사 처리와 관련된 기능을 제공하는 클래스입니다.
     /// </summary>
-    public static class Josa
+    public static class JosaExtansion
     {
         /// <summary>
         /// 한국어에서의 받침 유무에 따라 바뀌는 조사를 자동으로 추가합니다.
