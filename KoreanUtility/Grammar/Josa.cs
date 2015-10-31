@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using SteamB23.KoreanUtility.Hangul;
 
 namespace SteamB23.KoreanUtility.Grammar
@@ -9,7 +10,7 @@ namespace SteamB23.KoreanUtility.Grammar
     /// <summary>
     /// 한국어의 조사 처리와 관련된 기능을 제공하는 클래스입니다.
     /// </summary>
-    public static class JosaExtansion
+    public static class 조사
     {
         /// <summary>
         /// 한국어에서의 받침 유무에 따라 바뀌는 조사를 자동으로 추가합니다.
@@ -17,7 +18,7 @@ namespace SteamB23.KoreanUtility.Grammar
         /// <param name="text">대상 문자열입니다.</param>
         /// <param name="type">추가될 조사의 타입입니다.</param>
         /// <returns>조사가 추가된 문자열입니다.</returns>
-        public static string 조사추가(this string text, 조사 type)
+        public static string 조사추가(this string text, 조사종류 type)
         {
             char lastChar = char.Parse(text.Substring(text.Length - 1, 1));
             return text + 조사결정(lastChar, type);
@@ -27,12 +28,61 @@ namespace SteamB23.KoreanUtility.Grammar
         /// </summary>
         /// <param name="textBuilder">대상 <c>StringBuilder</c>입니다.</param>
         /// <param name="type">추가될 조사의 타입입니다.</param>
-        public static void 조사추가(this StringBuilder textBuilder, 조사 type)
+        public static void 조사추가(this StringBuilder textBuilder, 조사종류 type)
         {
             string text = textBuilder.ToString();
 
             char lastChar = char.Parse(text.Substring(text.Length - 1, 1));
             textBuilder.Append(조사결정(lastChar, type));
+        }
+        static Regex josaSignRegex = new Regex(@"\{은는\}|\{이가\}|\{을를\}|\{과와\}|\{아야\}|\{이\}|\{으로\}|\{는은\}|\{가이\}|\{를을\}|\{와과\}|\{야아\}|\{로\}", RegexOptions.Compiled);
+        public static string 문자처리(string text)
+        {
+            string[] spritedText = josaSignRegex.Split(text);
+            MatchCollection matchedText = josaSignRegex.Matches(text);
+            StringBuilder resultText = new StringBuilder();
+            for (int i = 0; i < matchedText.Count; i++)
+            {
+                switch (matchedText[i].Value)
+                {
+                    case "{은는}":
+                    case "{는은}":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.은는);
+                        break;
+                    case "{이가}":
+                    case "{가이}":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.이가);
+                        break;
+                    case "{을를}":
+                    case "{를을}":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.을를);
+                        break;
+                    case "{과와}":
+                    case "{와과}":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.과와);
+                        break;
+                    case "{아야}":
+                    case "{야아}":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.아야);
+                        break;
+                    case "{이}":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.이);
+                        break;
+                    case "{으로}":
+                    case "{로}":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.으로);
+                        break;
+                }
+            }
+            resultText.Append(spritedText.Last());
+            return resultText.ToString();
         }
         /// <summary>
         /// 마지막 글자의 받침 유무에 따라 바뀌는 조사를 결정합니다. 
@@ -40,7 +90,7 @@ namespace SteamB23.KoreanUtility.Grammar
         /// <param name="lastChar">확인할 글자입니다.</param>
         /// <param name="type">결정될 조사의 타입입니다.</param>
         /// <returns>결정된 조사입니다.</returns>
-        public static string 조사결정(char lastChar, 조사 type)
+        public static string 조사결정(char lastChar, 조사종류 type)
         {
             // 완성형 한글이 아니면 일단 '각'으로 특정해놓는다.
             if (!(lastChar >= '가' && lastChar <= '힣'))
@@ -50,19 +100,19 @@ namespace SteamB23.KoreanUtility.Grammar
             Phoneme phoneme = PhonemeConverter.CharacterToPhoneme(lastChar);
             switch (type)
             {
-                case 조사.은_는:
+                case 조사종류.은_는:
                     return GenericJosaRule(phoneme, "은", "는");
-                case 조사.이_가:
+                case 조사종류.이_가:
                     return GenericJosaRule(phoneme, "이", "가");
-                case 조사.을_를:
+                case 조사종류.을_를:
                     return GenericJosaRule(phoneme, "을", "를");
-                case 조사.과_와:
+                case 조사종류.과_와:
                     return GenericJosaRule(phoneme, "과", "와");
-                case 조사.아_야:
+                case 조사종류.아_야:
                     return GenericJosaRule(phoneme, "아", "야");
-                case 조사.이다_다:
+                case 조사종류.이다_다:
                     return GenericJosaRule(phoneme, "이", "");
-                case 조사.으로_로:
+                case 조사종류.으로_로:
                     if (phoneme.finalConsonantNumber == 0 || phoneme.finalConsonantNumber == 8)
                         return "로";
                     else
@@ -89,7 +139,7 @@ namespace SteamB23.KoreanUtility.Grammar
     /// <summary>
     /// 조사와 관련된 메서드에 대한 조사의 종류를 정의합니다.
     /// </summary>
-    public enum 조사
+    public enum 조사종류
     {
         // 빠른 자동 완성 사용을 위한 값
         /// <summary>
