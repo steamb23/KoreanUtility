@@ -36,6 +36,29 @@ namespace SteamB23.KoreanUtility.Grammar
             textBuilder.Append(조사결정(lastChar, type));
         }
         static Regex josaSignRegex;
+        /// <summary>
+        /// 조사 기호를 사용하여 한국어에서의 받침 유무에 따라 바뀌는 조사를 자동으로 추가합니다.
+        /// </summary>
+        /// <param name="text">대상 문자열입니다.</param>
+        /// <returns>조사가 추가된 문자열입니다.</returns>
+        /// <remarks>
+        /// <para>조사 기호에는 다음과 같이 중괄호로 묶여진 단어를 사용합니다.</para>
+        /// <para>
+        /// [은는]
+        /// [는은]
+        /// [이가]
+        /// [가이]
+        /// [을를]
+        /// [를을]
+        /// [과와]
+        /// [와과]
+        /// [아야]
+        /// [야아]
+        /// [이]
+        /// [으로]
+        /// [로]
+        /// </para>
+        /// </remarks>
         public static string 문자처리(string text)
         {
             정규식컴파일();
@@ -85,10 +108,19 @@ namespace SteamB23.KoreanUtility.Grammar
             resultText.Append(spritedText.Last());
             return resultText.ToString();
         }
+        /// <summary>
+        /// 서식과 조사 기호를 사용하여 한국어에서의 받침 유무에 따라 바뀌는 조사를 자동으로 추가합니다.
+        /// </summary>
+        /// <param name="text">대상 문자열입니다.</param>
+        /// <param name="args">서식을 지정할 개체를 0개 이상 포함하는 배열입니다.</param>
+        /// <returns></returns>
         public static string 문자처리(string text, params object[] args)
         {
             return 문자처리(string.Format(text, args));
         }
+        /// <summary>
+        /// 문자처리 메서드에서 사용되는 정규식을 미리 컴파일 시켜 성능을 향상시킵니다.
+        /// </summary>
         public static void 정규식컴파일()
         {
             if (josaSignRegex == null)
