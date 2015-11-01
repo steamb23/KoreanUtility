@@ -5,6 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using SteamB23.KoreanUtility.Hangul;
 
+/// <summary>
+/// 한국어 문법과 관련된 기능들을 다루는 네임스페이스입니다.
+/// </summary>
 namespace SteamB23.KoreanUtility.Grammar
 {
     /// <summary>
@@ -59,6 +62,13 @@ namespace SteamB23.KoreanUtility.Grammar
         /// [로]
         /// </para>
         /// </remarks>
+        /// <example>
+        /// 해당 기능은 다음과 같이 사용할 수 있습니다.
+        /// <code>
+        /// 조사.문자처리("마이크로소프트[은는] 새로운 증강현실 장치인 홀로렌즈[을를] 출시했다. 이는 컴퓨터[와과] 인간의 거리를 더욱 가깝게 해줄것이다.") == "마이크로소프트는 새로운 증강현실 장치인 홀로렌즈를 출시했다. 이는 컴퓨터와 인간의 거리를 더욱 가깝게 해줄것이다."
+        /// 조사.문자처리("{0}[은는] 새로운 증강현실 장치인 {1}[을를] 출시했다. 이는 {2}[와과] 인간의 거리를 더욱 가깝게 해줄것이다.", "마이크로소프트", "홀로렌즈", 컴퓨터") == "마이크로소프트는 새로운 증강현실 장치인 홀로렌즈를 출시했다. 이는 컴퓨터와 인간의 거리를 더욱 가깝게 해줄것이다."
+        /// </code>
+        /// </example>
         public static string 문자처리(string text)
         {
             정규식컴파일();
@@ -113,7 +123,14 @@ namespace SteamB23.KoreanUtility.Grammar
         /// </summary>
         /// <param name="text">대상 문자열입니다.</param>
         /// <param name="args">서식을 지정할 개체를 0개 이상 포함하는 배열입니다.</param>
-        /// <returns></returns>
+        /// <returns>조사가 추가된 문자열입니다.</returns>
+        /// <example>
+        /// 해당 기능은 다음과 같이 사용할 수 있습니다.
+        /// <code>
+        /// 조사.문자처리("마이크로소프트[은는] 새로운 증강현실 장치인 홀로렌즈[을를] 출시했다. 이는 컴퓨터[와과] 인간의 거리를 더욱 가깝게 해줄것이다.") == "마이크로소프트는 새로운 증강현실 장치인 홀로렌즈를 출시했다. 이는 컴퓨터와 인간의 거리를 더욱 가깝게 해줄것이다."
+        /// 조사.문자처리("{0}[은는] 새로운 증강현실 장치인 {1}[을를] 출시했다. 이는 {2}[와과] 인간의 거리를 더욱 가깝게 해줄것이다.", "마이크로소프트", "홀로렌즈", 컴퓨터") == "마이크로소프트는 새로운 증강현실 장치인 홀로렌즈를 출시했다. 이는 컴퓨터와 인간의 거리를 더욱 가깝게 해줄것이다."
+        /// </code>
+        /// </example>
         public static string 문자처리(string text, params object[] args)
         {
             return 문자처리(string.Format(text, args));
