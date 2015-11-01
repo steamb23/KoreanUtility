@@ -43,6 +43,7 @@
     <Compile Include="Hangul\Phoneme.cs" />
     <Compile Include="Hangul\PhonemeArrayManager.cs" />
     <Compile Include="Hangul\PhonemeConverter.cs" />
+    <Compile Include="Hangul\PhonemeConverter_Jamo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
