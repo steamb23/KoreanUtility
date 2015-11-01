@@ -8,7 +8,7 @@ namespace SteamB23.KoreanUtility.Hangul
     /// <summary>
     /// 자소를 분리하는 클래스입니다.
     /// </summary>
-    public static class PhonemeConverter
+    public static partial class PhonemeConverter
     {
         /// <summary>
         /// 문자에서 자소를 가져옵니다.
@@ -43,7 +43,7 @@ namespace SteamB23.KoreanUtility.Hangul
         public static Phoneme[] CharactersToPhonemes(char[] characters)
         {
             Phoneme[] phonemes = new Phoneme[characters.Length];
-            int fcount=0;
+            int fcount = 0;
             foreach (var ftemp in characters)
             {
                 phonemes[fcount] = CharacterToPhoneme(ftemp);
@@ -72,14 +72,125 @@ namespace SteamB23.KoreanUtility.Hangul
             // 첫가끝 번호 계산
             int initialConsonantNumber = initialConsonant - 0x1100;
             int medialVowelNumber = medialVowel - 0x1161;
-            int finalConsonantNumber = (medialVowel == '\0') ? 0 : medialVowel - 0x11a7;
+            int finalConsonantNumber = (finalConsonant == '\0') ? 0 : (finalConsonant - 0x11a7);
 
             // 조합
             char tempSource = (char)(((initialConsonantNumber * 21) + medialVowelNumber) * 28 + finalConsonantNumber + 0xac00);
 
             // 반환
             return new Phoneme(tempSource, initialConsonant, medialVowel, finalConsonant, (byte)initialConsonantNumber, (byte)medialVowelNumber, (byte)finalConsonantNumber);
+        }
+        /// <summary>
+        /// 자모만으로 이루어진 문자의 배열을 조합된 Phoneme의 배열로 변환합니다.
+        /// </summary>
+        /// <param name="jamoChars">자모 문자 배열</param>
+        /// <returns>조합된 Phoneme 배열</returns>
+        public static Phoneme[] JamosToPhonomes(char[] jamoChars)
+        {
+            List<Phoneme> phonemeList = new List<Phoneme>();
+            char tempInitialConsonant = '\0';
+            char tempMedialVowel = '\0';
+            char tempFinalConsonant = '\0';
+            // 자모 타입 분석
+            for (int i = 0; i < jamoChars.Length; i++)
+            {
+                char currentChar = jamoChars[i];
+                CHECK_START:
+                // 현재 글자는 초성이고 임시 초성 변수가 비어있다.
+                if (JamoIsInitialConsonant(currentChar) && tempInitialConsonant == '\0')
+                    tempInitialConsonant = JamoToInitialConsonant(currentChar);
+                // 현재 글자는 중성이고 임시 중성 변수가 비어있다.
+                else if (JamoIsMedialVowel(currentChar) && tempMedialVowel == '\0')
+                    tempMedialVowel = JamoToMedialVowel(currentChar);
+                // 현재 글자는 종성이고 임시 종성 변수가 비어있다.
+                else if (JamoIsFinalConsonant(currentChar) && tempFinalConsonant == '\0')
+                {
+                    // 다음글자가 중성이 아니다.
+                    int nextIndex = i + 1;
+                    if (nextIndex >= jamoChars.Length || !JamoIsMedialVowel(jamoChars[nextIndex]))
+                        tempFinalConsonant = JamoToFinalConsonant(currentChar);
+                    // 임시변수에 초성과 중성이 들어있다.
+                    else if (tempInitialConsonant != '\0' && tempMedialVowel != '\0')
+                    {
+                        phonemeList.Add(PhonemeCollecting(tempInitialConsonant, tempMedialVowel, tempFinalConsonant));
+                        tempInitialConsonant = '\0';
+                        tempMedialVowel = '\0';
+                        tempFinalConsonant = '\0';
+                    }
+                    // 임시변수에 초성만 들어있다.
+                    else if (tempInitialConsonant != '\0')
+                    {
+                        phonemeList.Add(CharacterToPhoneme(tempInitialConsonant));
+                        tempInitialConsonant = '\0';
+                        tempMedialVowel = '\0';
+                        tempFinalConsonant = '\0';
+                    }
+                    // 현재 글자는 초성이고 임시 초성 변수가 비어있다.
+                    if (JamoIsInitialConsonant(currentChar) && tempInitialConsonant == '\0')
+                        tempInitialConsonant = JamoToInitialConsonant(currentChar);
 
+                }
+                // 임시변수에 초성과 중성이 들어있다.
+                else if (tempInitialConsonant != '\0' && tempMedialVowel != '\0')
+                {
+                    phonemeList.Add(PhonemeCollecting(tempInitialConsonant, tempMedialVowel, tempFinalConsonant));
+                    tempInitialConsonant = '\0';
+                    tempMedialVowel = '\0';
+                    tempFinalConsonant = '\0';
+                    // 다시 확인해본다.
+                    goto CHECK_START;
+                }
+                // 임시변수에 초성만 들어있다.
+                else if (tempInitialConsonant != '\0')
+                {
+                    phonemeList.Add(CharacterToPhoneme(tempInitialConsonant));
+                    tempInitialConsonant = '\0';
+                    tempMedialVowel = '\0';
+                    tempFinalConsonant = '\0';
+                    // 다시 확인해본다.
+                    goto CHECK_START;
+                }
+                // 현재 글자는 한글이 아니거나 완성되지 못한 자모이다.
+                else
+                    phonemeList.Add(CharacterToPhoneme(currentChar));
+            }
+            // 임시변수에 초성과 중성이 들어있다.
+            if (tempInitialConsonant != '\0' && tempMedialVowel != '\0')
+            {
+                phonemeList.Add(PhonemeCollecting(tempInitialConsonant, tempMedialVowel, tempFinalConsonant));
+                tempInitialConsonant = '\0';
+                tempMedialVowel = '\0';
+                tempFinalConsonant = '\0';
+                // 다시 확인해본다.
+            }
+            // 임시변수에 초성과 중성이 들어있다.
+            if (tempInitialConsonant != '\0' && tempMedialVowel != '\0')
+            {
+                phonemeList.Add(PhonemeCollecting(tempInitialConsonant, tempMedialVowel, tempFinalConsonant));
+                tempInitialConsonant = '\0';
+                tempMedialVowel = '\0';
+                tempFinalConsonant = '\0';
+                // 다시 확인해본다.
+            }
+            // 임시변수에 초성만 들어있다.
+            else if (tempInitialConsonant != '\0')
+            {
+                phonemeList.Add(CharacterToPhoneme(tempInitialConsonant));
+                tempInitialConsonant = '\0';
+                tempMedialVowel = '\0';
+                tempFinalConsonant = '\0';
+                // 다시 확인해본다.
+            }
+            return phonemeList.ToArray();
+        }
+        /// <summary>
+        /// 자모만으로 이루어진 문자열을 조합된 Phoneme의 배열로 변환합니다.
+        /// </summary>
+        /// <param name="jamoText">자모 문자열</param>
+        /// <returns>조합된 Phoneme 배열</returns>
+        public static Phoneme[] JamosToPhonomes(string jamoText)
+        {
+            return JamosToPhonomes(jamoText.ToCharArray());
         }
     }
 }

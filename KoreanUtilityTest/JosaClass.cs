@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamB23.KoreanUtility;
 using SteamB23.KoreanUtility.Grammar;
+using SteamB23.KoreanUtility.Hangul;
 
 namespace KoreanUtilityTest
 {
@@ -103,6 +105,17 @@ namespace KoreanUtilityTest
         public void 문자처리_Format()
         {
             Assert.AreEqual(조사.문자처리("{0}[은는] {1}[이가] 아파서 {2}[와과] 함께 {3}[으로] 향했다.","영희","배","아버지","병원"), "영희는 배가 아파서 아버지와 함께 병원으로 향했다.");
+        }
+        [TestMethod]
+        public void 문자조합()
+        {
+            Phoneme[] phonemes= PhonemeConverter.JamosToPhonomes("ㅇㅕㅇㅎㅢㅇㅑ ㅇㅏㄴㄴㅕㅇ? 넌 ㅈㅓㅇㅁㅏㄹ Sexy하구나.");
+            StringBuilder resultStringBuilder = new StringBuilder();
+            foreach (var phoneme in phonemes)
+            {
+                resultStringBuilder.Append(phoneme.source);
+            }
+            Assert.AreEqual(resultStringBuilder.ToString(), "영희야 안녕? 넌 정말 Sexy하구나.");
         }
     }
 }

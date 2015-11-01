@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-/// <summary>
-/// 한글의 원리를 다루는 네임스페이스입니다.
-/// </summary>
 namespace SteamB23.KoreanUtility.Hangul
 {
     /// <summary>

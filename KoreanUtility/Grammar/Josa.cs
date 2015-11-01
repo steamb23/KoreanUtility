@@ -5,9 +5,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using SteamB23.KoreanUtility.Hangul;
 
-/// <summary>
-/// 한국어 문법과 관련된 기능들을 다루는 네임스페이스입니다.
-/// </summary>
 namespace SteamB23.KoreanUtility.Grammar
 {
     /// <summary>
