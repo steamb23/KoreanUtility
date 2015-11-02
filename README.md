@@ -12,7 +12,7 @@ KoreanUtility
 - 유니티용 라이브러리를 지원합니다.
 
 ## 사용 예제
-사용 예제에 없는 KoreanUtility의 다른 기능들은 [단위테스트 코드](KoreaUtility/KoreanUtilityTest/JosaClass.cs)를 참고하세요.
+사용 예제에 없는 KoreanUtility의 다른 기능들은 [단위테스트 코드](KoreanUtilityTest/JosaClass.cs)를 참고하세요.
 
 ### 조사 처리 (메서드 사용)
 
