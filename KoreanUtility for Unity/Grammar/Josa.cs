@@ -54,9 +54,9 @@ namespace SteamB23.KoreanUtility.Grammar
         /// [와과]
         /// [아야]
         /// [야아]
-        /// [이]
         /// [으로]
         /// [로]
+        /// [이]
         /// </para>
         /// </remarks>
         /// <example>
@@ -101,14 +101,29 @@ namespace SteamB23.KoreanUtility.Grammar
                         resultText.Append(spritedText[i]);
                         resultText.조사추가(조사종류.아야);
                         break;
-                    case "[이]":
-                        resultText.Append(spritedText[i]);
-                        resultText.조사추가(조사종류.이);
-                        break;
                     case "[으로]":
                     case "[로]":
                         resultText.Append(spritedText[i]);
                         resultText.조사추가(조사종류.으로);
+                        break;
+                    case "[이]":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.이);
+                        break;
+                    case "[이에]":
+                    case "[예]":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.이에);
+                        break;
+                    case "[이어]":
+                    case "[여]":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.이어);
+                        break;
+                    case "[이었]":
+                    case "[였]":
+                        resultText.Append(spritedText[i]);
+                        resultText.조사추가(조사종류.이었);
                         break;
                 }
             }
@@ -135,11 +150,11 @@ namespace SteamB23.KoreanUtility.Grammar
         /// <summary>
         /// 문자처리 메서드에서 사용되는 정규식을 미리 컴파일 시켜 성능을 향상시킵니다.
         /// </summary>
-        static void 정규식컴파일()
+        public static void 정규식컴파일()
         {
             if (josaSignRegex == null)
             {
-                josaSignRegex = new Regex(@"\[은는\]|\[이가\]|\[을를\]|\[과와\]|\[아야\]|\[이\]|\[으로\]|\[는은\]|\[가이\]|\[를을\]|\[와과\]|\[야아\]|\[로\]");
+                josaSignRegex = new Regex(@"\[은는\]|\[이가\]|\[을를\]|\[과와\]|\[아야\]|\[으로\]|\[이\]|\[이에\]|\[이어\]|\[이었\]|\[는은\]|\[가이\]|\[를을\]|\[와과\]|\[야아\]|\[로\]|\[예\]|\[여\]|\[였\]");
             }
         }
         /// <summary>
@@ -168,13 +183,19 @@ namespace SteamB23.KoreanUtility.Grammar
                     return GenericJosaRule(phoneme, "과", "와");
                 case 조사종류.아_야:
                     return GenericJosaRule(phoneme, "아", "야");
-                case 조사종류.이다_다:
-                    return GenericJosaRule(phoneme, "이", "");
                 case 조사종류.으로_로:
                     if (phoneme.finalConsonantNumber == 0 || phoneme.finalConsonantNumber == 8)
                         return "로";
                     else
                         return "으로";
+                case 조사종류.이_:
+                    return GenericJosaRule(phoneme, "이", "");
+                case 조사종류.이에_예:
+                    return GenericJosaRule(phoneme, "이에", "예");
+                case 조사종류.이어_여:
+                    return GenericJosaRule(phoneme, "이어", "여");
+                case 조사종류.이었_였:
+                    return GenericJosaRule(phoneme, "이었", "였");
                 default:
                     return "";
             }
@@ -221,15 +242,30 @@ namespace SteamB23.KoreanUtility.Grammar
         /// </summary>
         _아야 = 4,
         /// <summary>
-        /// 서술격 조사 : 이다/다
-        /// (경고 : 이다/다, 이고/고, 이니/고, 이면/면, 이지/지, 이여/여 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
-        /// </summary>
-        _이다 = 5,
-        /// <summary>
         /// 부사격 조사 : 으로/로,
         /// (경고 : ㄹ받침은 받침이 없는 경우와 같습니다.)
         /// </summary>
-        _으로 = 6,
+        _으로 = 5,
+        /// <summary>
+        /// 서술격 조사 : 이-/-
+        /// (경고 : 이다/다, 이고/고, 이니/고, 이면/면, 이지/지, 이여/여 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
+        /// </summary>
+        _이 = 6,
+        /// <summary>
+        /// 서술격 조사 : 이에-/예-
+        /// ('~이에요.' 등으로 사용됩니다.)
+        /// </summary>
+        _이에예 = 7,
+        /// <summary>
+        /// 서술격 조사 : 이어-/여-
+        /// ('~이어서~', '~이어요.' 등으로 사용됩니다.)
+        /// </summary>
+        _이어여 = 8,
+        /// <summary>
+        /// 서술격 조사 : 이었-/였-
+        /// ('~이었다.', '~이었습니다.', '~이었기~' 등으로 사용됩니다.
+        /// </summary>
+        _이었였 = 9,
 
         // 빠른 작성을 위한 값
         /// <summary>
@@ -253,15 +289,30 @@ namespace SteamB23.KoreanUtility.Grammar
         /// </summary>
         아야 = 4,
         /// <summary>
-        /// 서술격 조사 : 이다/다
-        /// (경고 : 이다/다, 이고/고, 이니/고, 이면/면, 이지/지, 이여/여 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
-        /// </summary>
-        이 = 5,
-        /// <summary>
         /// 부사격 조사 : 으로/로,
         /// (경고 : ㄹ받침은 받침이 없는 경우와 같습니다.)
         /// </summary>
-        으로 = 6,
+        으로 = 5,
+        /// <summary>
+        /// 서술격 조사 : 이-/-
+        /// (경고 : 이다/다, 이고/고, 이니/고, 이면/면, 이지/지, 이여/여 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
+        /// </summary>
+        이 = 6,
+        /// <summary>
+        /// 서술격 조사 : 이에-/예-
+        /// ('~이에요.' 등으로 사용됩니다.)
+        /// </summary>
+        이에 = 7,
+        /// <summary>
+        /// 서술격 조사 : 이어-/여-
+        /// ('~이어서~', '~이어요.' 등으로 사용됩니다.)
+        /// </summary>
+        이어 = 8,
+        /// <summary>
+        /// 서술격 조사 : 이었-/였-
+        /// ('~이었다.', '~이었습니다.', '~이었기~' 등으로 사용됩니다.
+        /// </summary>
+        이었 = 9,
 
         // 가독성을 위한 값
         /// <summary>
@@ -285,15 +336,30 @@ namespace SteamB23.KoreanUtility.Grammar
         /// </summary>
         아_야 = 4,
         /// <summary>
-        /// 서술격 조사 : 이다/다
-        /// (경고 : 이다/다, 이고/고, 이니/고, 이면/고, 이지/지 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
-        /// </summary>
-        이다_다 = 5,
-        /// <summary>
         /// 부사격 조사 : 으로/로,
         /// ㄹ받침은 받침이 없는 경우와 같다.
         /// </summary>
-        으로_로 = 6,
+        으로_로 = 5,
+        /// <summary>
+        /// 서술격 조사 : 이-/-
+        /// (경고 : 이다/다, 이고/고, 이니/고, 이면/고, 이지/지 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
+        /// </summary>
+        이_ = 6,
+        /// <summary>
+        /// 서술격 조사 : 이에-/예-
+        /// ('~이에요.' 등으로 사용됩니다.)
+        /// </summary>
+        이에_예 = 7,
+        /// <summary>
+        /// 서술격 조사 : 이어-/여-
+        /// ('~이어서~', '~이어요.' 등으로 사용됩니다.)
+        /// </summary>
+        이어_여 = 8,
+        /// <summary>
+        /// 서술격 조사 : 이었-/였-
+        /// ('~이었다.', '~이었습니다.', '~이었기~' 등으로 사용됩니다.
+        /// </summary>
+        이었_였 = 9,
 
         // 영어 대문자 값
         /// <summary>
@@ -317,14 +383,29 @@ namespace SteamB23.KoreanUtility.Grammar
         /// </summary>
         AY = 4,
         /// <summary>
-        /// 서술격 조사 : 이다/다
-        /// (경고 : 이다/다, 이고/고, 이니/고, 이면/고, 이지/지 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
-        /// </summary>
-        IDD = 5,
-        /// <summary>
         /// 부사격 조사 : 으로/로,
         /// ㄹ받침은 받침이 없는 경우와 같다.
         /// </summary>
-        ERR = 6
+        ERR = 5,
+        /// <summary>
+        /// 서술격 조사 : 이-/-
+        /// (경고 : 이다/다, 이고/고, 이니/고, 이면/고, 이지/지 등으로 변형 사례가 많기 때문에 '이'와 ''를 리턴합니다.)
+        /// </summary>
+        I = 6,
+        /// <summary>
+        /// 서술격 조사 : 이에-/예-
+        /// ('~이에요.' 등으로 사용됩니다.)
+        /// </summary>
+        IE = 7,
+        /// <summary>
+        /// 서술격 조사 : 이어-/여-
+        /// ('~이어서~', '~이어요.' 등으로 사용됩니다.)
+        /// </summary>
+        IEO = 8,
+        /// <summary>
+        /// 서술격 조사 : 이었-/였-
+        /// ('~이었다.', '~이었습니다.', '~이었기~' 등으로 사용됩니다.
+        /// </summary>
+        IEOT = 9,
     }
 }

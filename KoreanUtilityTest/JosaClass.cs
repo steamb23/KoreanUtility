@@ -52,18 +52,36 @@ namespace KoreanUtilityTest
             Assert.AreEqual("단감".조사추가(조사종류.이) + "여, 그대는 먹히기 위한 존재.", "단감이여, 그대는 먹히기 위한 존재.");
         }
         [TestMethod]
-        public void 이다_다()
-        {
-            Assert.AreEqual("사과".조사추가(조사종류.이) + "다.", "사과다.");
-            Assert.AreEqual("단감".조사추가(조사종류.이) + "다.", "단감이다.");
-        }
-        [TestMethod]
         public void 으로_로()
         {
             Assert.AreEqual("사과".조사추가(조사종류.으로) + " 장난치지마.", "사과로 장난치지마.");
             Assert.AreEqual("물".조사추가(조사종류.으로) + " 장난치지마.", "물로 장난치지마.");
             Assert.AreEqual("연근".조사추가(조사종류.으로) + " 장난치지마.", "연근으로 장난치지마.");
             Assert.AreEqual("단감".조사추가(조사종류.으로) + " 장난치지마.", "단감으로 장난치지마.");
+        }
+        [TestMethod]
+        public void 이_()
+        {
+            Assert.AreEqual("사과".조사추가(조사종류.이) + "다.", "사과다.");
+            Assert.AreEqual("단감".조사추가(조사종류.이) + "다.", "단감이다.");
+        }
+        [TestMethod]
+        public void 이에_예()
+        {
+            Assert.AreEqual("사과".조사추가(조사종류.이에) + "요.", "사과예요.");
+            Assert.AreEqual("단감".조사추가(조사종류.이에) + "요.", "단감이에요.");
+        }
+        [TestMethod]
+        public void 이어_여()
+        {
+            Assert.AreEqual("사과".조사추가(조사종류.이어) + "서 다행이다.", "사과여서 다행이다.");
+            Assert.AreEqual("단감".조사추가(조사종류.이어) + "서 다행이다.", "단감이어서 다행이다.");
+        }
+        [TestMethod]
+        public void 이었_였()
+        {
+            Assert.AreEqual("사과".조사추가(조사종류.이었) + "다.", "사과였다.");
+            Assert.AreEqual("단감".조사추가(조사종류.이었) + "다.", "단감이었다.");
         }
         [TestMethod]
         public void 한글외_언어_인식()
