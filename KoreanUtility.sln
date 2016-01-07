@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoreanUtilityTest", "Korean
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoreanUtility for Unity", "KoreanUtility for Unity\KoreanUtility for Unity.csproj", "{4FEDE180-C8EF-4E5E-B99B-EDB67CB6D725}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoreanUtility for Unity Subset", "KoreanUtility for Unity Subset\KoreanUtility for Unity Subset.csproj", "{481E0969-89FA-41CA-824B-401113D307B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{4FEDE180-C8EF-4E5E-B99B-EDB67CB6D725}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FEDE180-C8EF-4E5E-B99B-EDB67CB6D725}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FEDE180-C8EF-4E5E-B99B-EDB67CB6D725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{481E0969-89FA-41CA-824B-401113D307B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{481E0969-89FA-41CA-824B-401113D307B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{481E0969-89FA-41CA-824B-401113D307B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{481E0969-89FA-41CA-824B-401113D307B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

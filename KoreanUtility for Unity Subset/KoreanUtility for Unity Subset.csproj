@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4FEDE180-C8EF-4E5E-B99B-EDB67CB6D725}</ProjectGuid>
+    <ProjectGuid>{481E0969-89FA-41CA-824B-401113D307B5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SteamB23.KoreanUtility</RootNamespace>
-    <AssemblyName>KoreanUtility for Unity</AssemblyName>
+    <AssemblyName>KoreanUtility for Unity Subset</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,7 +29,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\KoreanUtility for Unity.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
